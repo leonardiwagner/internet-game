@@ -1,0 +1,72 @@
+body{
+  margin: 0;
+}
+
+.background{
+  width:100%;
+  height:200px;
+  position: absolute;
+
+
+}
+
+#background-layer-0{
+  background-color: orange;
+  
+  /*z-index: 50;*/
+}
+
+#background-layer-1{
+  background-color: red;
+  
+  top:200px;
+
+  /*z-index: 55;*/
+}
+
+#background-layer-2{
+  background-color: orange;
+  
+   top:400px;
+
+/*z-index: 60;*/
+}
+
+
+.character{
+  background-image:  url('../img/sprite-characters.png');  
+  position:absolute;
+
+  width: 200px;
+  height: 200px;
+
+  background-color: green;
+}
+
+#character-0{
+  top: 100px;
+  left:-60px;
+
+  /*z-index: 51;*/
+}
+
+#character-1{
+  top: 100px;
+  left:180px;
+
+  /*z-index: 51;*/
+}
+
+#character-2{
+  top: 400px;
+  left:-60px;
+
+  /*z-index: 51;*/
+}
+
+#character-3{
+  top: 400px;
+  left:180px;
+
+  /*z-index: 51;*/
+}
