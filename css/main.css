@@ -10,10 +10,16 @@ body{
 
 }
 
+#container{
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
 #background-layer-0{
   background-color: orange;
   
-  /*z-index: 50;*/
+  z-index: 50;
 }
 
 #background-layer-1{
@@ -21,15 +27,15 @@ body{
   
   top:200px;
 
-  /*z-index: 55;*/
+  z-index: 55;
 }
 
 #background-layer-2{
   background-color: orange;
   
-   top:400px;
+ top:400px;
 
-/*z-index: 60;*/
+  z-index: 60;
 }
 
 
@@ -44,29 +50,110 @@ body{
 }
 
 #character-0{
-  top: 100px;
+  
   left:-60px;
 
-  /*z-index: 51;*/
+  z-index: 51;
 }
 
 #character-1{
-  top: 100px;
+  
   left:180px;
 
-  /*z-index: 51;*/
+  z-index: 51;
 }
 
 #character-2{
-  top: 400px;
+  
   left:-60px;
 
-  /*z-index: 51;*/
+  z-index: 56;
 }
 
 #character-3{
-  top: 400px;
+  
   left:180px;
 
-  /*z-index: 51;*/
+  z-index: 56;
+}
+
+#player-health{
+  position: absolute;
+  font-size:2em;
+  left: 0%;
+  padding-left: 2%;
+  text-align: right;
+  bottom:20px;
+  z-index:100;
+}
+
+#player-health img{
+  width: 20px;
+}
+
+#player-health-bar{
+   position: absolute;
+  background-color: blue;
+  font-size:2em;
+  left: 0%;
+  bottom:0px;
+  width: 100%;
+  height: 20px;
+  z-index:100;
+}
+#player-health-bar-fill{
+   position: absolute;
+  background-color: red;
+  font-size:2em;
+  left: 0%;
+  bottom:0px;
+  width: 60%;
+  height: 20px;
+  z-index:101;
+}
+
+
+#player-score{
+  position: absolute;
+  background-color: blue;
+  font-size:2em;
+  right: 10%;
+  bottom:20px;
+}
+
+#message{
+  position: absolute;
+  top:0;
+  text-align: center;
+  width: 100%;
+  font-size:2em;
+  background-color: yellow;
+
+  z-index:100;
+}
+
+#reload-button{
+  position: absolute;
+  /* font-size: 2em; */
+  right: 0%;
+  padding-left: 2%;
+  /* text-align: right; */
+  bottom: 20px;
+  z-index: 100;
+}
+
+#reload-button img{
+  width:100px;
+}
+
+#gun{
+   position: absolute;
+  left: 8%;
+  bottom: 20px;
+  background-image: url('../img/sprite-handgun.png');
+  width: 170px;
+  height: 142px;
+  /* background-color: yellow; */
+  z-index: 100;
+  background-size: 117%;
 }

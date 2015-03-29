@@ -1,21 +1,4 @@
-var characters = [
-  {
-    "name": "character-0",
-    "status": "stopped"
-  },
-  {
-    "name": "character-1",
-    "status": "stopped"
-  },
-  {
-    "name": "character-2",
-    "status": "stopped"
-  },
-  {
-    "name": "character-3",
-    "status": "stopped"
-  },
-];
+
 
 
 var runCharacter = function(){

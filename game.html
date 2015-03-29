@@ -5,19 +5,38 @@
     
   </head>
 	<body>
-    <div id="background-layer-0" class="background"></div>
-    <div id="background-layer-1" class="background"></div>
-    <div id="background-layer-2" class="background"></div>
-    
+    <div id="container">
 
-    <div id="character-0" class="character"></div>
-    <div id="character-1" class="character"></div>
-    <div id="character-2" class="character"></div>
-    <div id="character-3" class="character"></div>
+      <div id="background-layer-0" class="background"></div>
+      <div id="background-layer-1" class="background"></div>
+      <div id="background-layer-2" class="background"></div>
+      
+
+      <div id="character-0" data-id="0" class="character"></div>
+      <div id="character-1" data-id="1" class="character"></div>
+      <div id="character-2" data-id="2" class="character"></div>
+      <div id="character-3" data-id="3" class="character"></div>
+
+      <div id="player-health"><img src="img/icon-health.png"/>100</div>
+      <div id="player-health-bar">
+        <div id="player-health-bar-fill"></div>
+      </div>
+      <div id="player-score">0</div>
+
+      <div id="message">YEAH!</div>
+
+      <div id="gun"></div>
+
+      <div id="reload-button">
+        <img id="reload-button-reload" src="img/button-reload.png" />
+        <img id="reload-button-reloading" src="img/button-reloading.png" style="display:none;"/>
+      </div>
+    </div>
 
 	</body>
   <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
   <script src="js/character.js"></script>
+  <script src="js/gun.js"></script>
   <script type="text/javascript">
   /*
     $(".character").css("top","250px");
