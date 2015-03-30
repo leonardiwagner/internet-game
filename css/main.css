@@ -1,5 +1,6 @@
 body{
   margin: 0;
+  background-color: black;
 }
 
 
@@ -21,7 +22,7 @@ body{
   position: absolute;
 
 
-background-color: grey;
+  background-color: black;
 
 }
 
@@ -32,13 +33,13 @@ background-color: grey;
 }
 
 #background-layer-0{
-  background-color: orange;
+  background-color: black;
   
   z-index: 50;
 }
 
 #background-layer-1{
-  background-color: red;
+  background-color: black;
   
   top:200px;
 
@@ -46,7 +47,7 @@ background-color: grey;
 }
 
 #background-layer-2{
-  background-color: orange;
+  background-color: black;
   
  top:400px;
 
@@ -61,7 +62,7 @@ background-color: grey;
   width: 200px;
   height: 200px;
 
-  background-color: green;
+  background-color: black;
 }
 
 #character-0{
@@ -73,21 +74,21 @@ background-color: grey;
 
 #character-1{
   
-  left:162px;
+  left:183px;
 
   z-index: 51;
 }
 
 #character-2{
   
-  left:20px;
+  left:15px;
 
   z-index: 56;
 }
 
 #character-3{
   
-  left:162px;
+  left:173px;
 
   z-index: 56;
 }

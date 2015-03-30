@@ -4,8 +4,8 @@ var characterPlaceholder = [
     "name": "character-0",
     "status": "stopped",
     "character": null,
-    "startY": 210,
-    "maximumY": 60,
+    "startY": 180,
+    "maximumY": 30,
     "currentTimeout": null,
   },
   {
@@ -13,8 +13,8 @@ var characterPlaceholder = [
     "name": "character-1",
     "status": "stopped",
     "character": null,
-    "startY": 210,
-    "maximumY": 60,
+    "startY": 180,
+    "maximumY": 30,
     "currentTimeout": null,
   },
   {
@@ -23,7 +23,7 @@ var characterPlaceholder = [
     "status": "stopped",
     "character": null,
     "startY": 474,
-    "maximumY": 320,
+    "maximumY": 280,
     "currentTimeout": null,
   },
   {
@@ -32,7 +32,7 @@ var characterPlaceholder = [
     "status": "stopped",
     "character": null,
     "startY": 474,
-    "maximumY": 320,
+    "maximumY": 280,
     "currentTimeout": null,
   },
 ];
