@@ -4,8 +4,8 @@ var characterPlaceholder = [
     "name": "character-0",
     "status": "stopped",
     "character": null,
-    "startY": 100,
-    "maximumY": 17,
+    "startY": 210,
+    "maximumY": 60,
     "currentTimeout": null,
   },
   {
@@ -13,8 +13,8 @@ var characterPlaceholder = [
     "name": "character-1",
     "status": "stopped",
     "character": null,
-    "startY": 100,
-    "maximumY": 17,
+    "startY": 210,
+    "maximumY": 60,
     "currentTimeout": null,
   },
   {
@@ -22,8 +22,8 @@ var characterPlaceholder = [
     "name": "character-2",
     "status": "stopped",
     "character": null,
-    "startY": 400,
-    "maximumY": 228,
+    "startY": 474,
+    "maximumY": 320,
     "currentTimeout": null,
   },
   {
@@ -31,8 +31,8 @@ var characterPlaceholder = [
     "name": "character-3",
     "status": "stopped",
     "character": null,
-    "startY": 400,
-    "maximumY": 228,
+    "startY": 474,
+    "maximumY": 320,
     "currentTimeout": null,
   },
 ];
@@ -68,20 +68,8 @@ addCharacter("ahh", 0, 80, -180, -390, -570,["negobam-1.ogg", "negobam-2.ogg"],[
 
 
 
-characterPlaceholder[0].character = characters[0];
-characterPlaceholder[1].character = characters[1];
-characterPlaceholder[2].character = characters[2];
-characterPlaceholder[3].character = characters[3];
 
-var renderCharacterPlaceholer = function(){
-  for(var i = 0; i < characterPlaceholder.length; i++){
-    var currentCharacter = characterPlaceholder[i].character;
-    $("#" + characterPlaceholder[i].name).css("top", characterPlaceholder[i].startY + "px");
-    $("#" + characterPlaceholder[i].name).css("background-position-x", currentCharacter.x + "px");
-    $("#" + characterPlaceholder[i].name).css("background-position-y", currentCharacter.y + "px");
-  }
 
-};
 
 
 var moveCharacter = function(characterPlaceholder, moveY, isToMoveDown){
@@ -91,10 +79,12 @@ var moveCharacter = function(characterPlaceholder, moveY, isToMoveDown){
     if(currentTop == characterPlaceholder.startY){
        //play pepare sound
        var soundI = random(0, characterPlaceholder.character.prepareSounds.length - 1);
-       playSound(characterPlaceholder.character.prepareSounds[soundI]);
+       playSound(characterPlaceholder.character.prepareSounds[soundI], 0);
 
       isToMoveDown = false;
       moveY = characterPlaceholder.startY;
+
+      
     }else{
       isToMoveDown = true;
       moveY = characterPlaceholder.maximumY;
@@ -125,9 +115,12 @@ var moveCharacter = function(characterPlaceholder, moveY, isToMoveDown){
     if(isToMoveDown){
       $("#" + characterPlaceholder.name).css("top", characterPlaceholder.startY + "px");
       characterPlaceholder.status = "stopped";
+      
+      
+      /*
       characterPlaceholder.currentTimeout =  setTimeout(function(){
-        moveCharacter(characterPlaceholder);
-      },500);
+       // moveCharacter(characterPlaceholder);
+      },500);*/
     }else{
       characterPlaceholder.status = "showing";
       actionCharacter(characterPlaceholder);
@@ -139,7 +132,7 @@ var moveCharacter = function(characterPlaceholder, moveY, isToMoveDown){
 
 
 
-var actionCharacter = function(characterPlaceholder){
+var actionCharacter = function(characterPlaceholder, callback){
   characterPlaceholder.status = "prepare";
   $("#" + characterPlaceholder.name).css("background-position-x", characterPlaceholder.character.prepareX + "px");
 
@@ -153,7 +146,7 @@ var actionCharacter = function(characterPlaceholder){
       var timeToShoot = random(500, 2000);
       characterPlaceholder.currentTimeout = setTimeout(function(){
         characterPlaceholder.status = "shot";
-        playSound("shoot-2.ogg");
+        playSound("shoot-2.ogg", 2);
         $(".fire[data-id='" + characterPlaceholder.id  + "']").show();
         
         sumLife(-10);
@@ -163,7 +156,7 @@ var actionCharacter = function(characterPlaceholder){
 
           $(".fire[data-id='" + characterPlaceholder.id  + "']").hide();
 
-           playSound("hit.ogg");
+           playSound("player-hit.ogg", 5);
         }, 500);
       }, timeToShoot);
 
@@ -174,56 +167,78 @@ var actionCharacter = function(characterPlaceholder){
 
 };
 
-$(".character").click(function(characterPlaceholderElement){
 
-  playSound("shoot-1.ogg");
-  shotAnimation();
-
-
-
-   var placeholder = characterPlaceholder[$(characterPlaceholderElement.currentTarget).attr("data-id")];
-   //playsound
-   var soundI = random(0, placeholder.character.hitSounds.length - 1);
-   playSound(placeholder.character.hitSounds[soundI]);
-
-    $(".blood[data-id=" + placeholder.id + "]").css("left", characterPlaceholderElement.clientX -50 + "px");
-    $(".blood[data-id=" + placeholder.id + "]").css("top", characterPlaceholderElement.clientY - 50 + "px");
-    $(".blood[data-id=" + placeholder.id + "]").show();
-    clearTimeout(placeholder.currentTimeout);
-    setTimeout(function(){
-      $(".blood[data-id=" + placeholder.id + "]").hide();
-      moveCharacter(placeholder);
-
-    }, 500);
-    
-   
-  if(placeholder.status == "will shoot"){
-
-    message("good!");
-
-
-
-  }else if(placeholder.status == "shot"){
-    message("already shot!");
-  }else{
-    message("bad!");
-
-    $("#" + placeholder.name).css("background-position-x", placeholder.character.hitX + "px");
-  }
-
-});
 
 var message = function(text){
   $("#message").html(text);
 };
 
 
-renderCharacterPlaceholer();
 
-moveCharacter(characterPlaceholder[0]);
-moveCharacter(characterPlaceholder[1]);
-moveCharacter(characterPlaceholder[2]);
-moveCharacter(characterPlaceholder[3]);
+
+var getRandomCharacter = function(){
+  var randomCharacterIndex = random(0, characters.length - 1);
+  return characters[randomCharacterIndex];
+};
+
+var getRandomPlaceholderStopped = function(){
+  var randomPlaceholderId = random(0, characterPlaceholder.length - 1);
+  return characterPlaceholder[randomPlaceholderId];
+};
+
+var renderPlaceholder = function(placeholder){
+  $("#" + placeholder.name).css("top", placeholder.startY + "px");
+  $("#" + placeholder.name).css("background-position-x", placeholder.character.x + "px");
+  $("#" + placeholder.name).css("background-position-y", placeholder.character.y + "px");
+};
+
+var getCharactersMovingCount = function(){
+  var count = 0;
+  for(var i = 0; i < characterPlaceholder.length; i++){
+    if(characterPlaceholder[i].status != "stopped"){
+      count ++;
+    }
+  }
+
+  return count;
+};
+
+
+var setCharacterToMove = function(maxCharactersAtSameTime){
+  if(getCharactersMovingCount() < maxCharactersAtSameTime){
+    var placeholder = getRandomPlaceholderStopped();
+    placeholder.character = getRandomCharacter();
+    renderPlaceholder(placeholder);
+     
+    
+    moveCharacter(placeholder);
+  }
+
+};
+
+
+
+setInterval(function(){
+  var characters = 0;
+  if(player.kills < 3){
+    characters = 1;
+  }else if(player.kills < 7){
+    characters = 2;
+  }else if(player.kills < 10){
+    characters = 3;
+  }else{
+    characters = 4;
+  }
+
+  setCharacterToMove(characters);
+}, 1000);
+
+
+
+
+
+
+
 
 
 /*
