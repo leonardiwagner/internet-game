@@ -79,8 +79,6 @@ $(".character").click(function(characterPlaceholderElement){
   playSound("shoot-1.ogg", 4);
   shotAnimation();
 
-
-
    var placeholder = characterPlaceholder[$(characterPlaceholderElement.currentTarget).attr("data-id")];
    //playsound
    var soundI = random(0, placeholder.character.hitSounds.length - 1);
@@ -92,7 +90,7 @@ $(".character").click(function(characterPlaceholderElement){
     clearTimeout(placeholder.currentTimeout);
     setTimeout(function(){
       $(".blood[data-id=" + placeholder.id + "]").hide();
-      moveCharacter(placeholder);
+      moveCharacter(placeholder, true);
 
     }, 500);
     
@@ -108,7 +106,6 @@ $(".character").click(function(characterPlaceholderElement){
     message("already shot!");
   }else{
     message("bad!");
-
     $("#" + placeholder.name).css("background-position-x", placeholder.character.hitX + "px");
   }
 

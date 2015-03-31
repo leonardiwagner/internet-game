@@ -79,11 +79,12 @@ $(".character").on("transitionend webkitTransitionEnd oTransitionEnd", function(
 });
 
 
-var moveCharacter = function(characterPlaceholder){
+var moveCharacter = function(characterPlaceholder, isMoveDown){
+  if(isMoveDown == undefined) isMoveDown = false;
   characterPlaceholder.status = "moving";
   var placeholderSelector = $("#" + characterPlaceholder.name);
   var currentTop = placeholderSelector.css("top").replace("%","").replace("px", "");
-  if(currentTop == characterPlaceholder.startY){
+  if(currentTop == characterPlaceholder.startY && !isMoveDown){
     //so move up
     placeholderSelector.css("top", characterPlaceholder.maximumY + "px");
     placeholderSelector.addClass("take-action");
