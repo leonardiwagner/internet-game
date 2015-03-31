@@ -55,15 +55,45 @@ body{
 }
 
 
+
+
 .character{
   background-image:  url('../img/sprite-characters.png');  
+
   position:absolute;
 
   width: 200px;
   height: 200px;
 
-  background-color: black;
+  background-color: green;
+
+  top: 500px;
+
+/*
+  -moz-transform: translateZ(0);
+  -moz-backface-visibility: hidden;
+  -moz-animation-name: upCharacter;
+  -moz-animation-duration: 5s;
+  -moz-animation-iteration-count: 10;
+  -moz-animation-direction: linear;
+ 
+
+*/
 }
+
+.character-transition{
+  transition-property: top;
+  transition-duration: 3s;
+  transition-timing-function: linear;
+}
+
+/*
+@-moz-keyframes upCharacter {
+  100%{
+    top: 200px;
+  }
+}
+*/
 
 #character-0{
   
@@ -92,6 +122,8 @@ body{
 
   z-index: 56;
 }
+
+
 
 #player-health{
   position: absolute;
@@ -176,6 +208,8 @@ body{
 #reload-button img{
   width:100px;
 }
+
+
 
 #gun{
    position: absolute;

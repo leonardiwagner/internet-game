@@ -69,10 +69,46 @@ addCharacter("ahh", 0, 80, -180, -390, -570,["negobam-1.ogg", "negobam-2.ogg"],[
 
 
 
+//on character transition (such as move up/down)
+$(".character").on("transitionend webkitTransitionEnd oTransitionEnd", function(){
+ var placeholder = characterPlaceholder[$(this).data("id")];
+ if($(this).hasClass("take-action")){
+  placeholder.status = "moved";
+  $(this).removeClass("take-action");
+
+  
+  //play pepare sound
+  var soundI = random(0, placeholder.character.prepareSounds.length - 1);
+  playSound(placeholder.character.prepareSounds[soundI], 0);
+  
+  actionCharacter(placeholder);
+ }else if($(this).hasClass("hide")){
+  $(this).removeClass("hide");
+  placeholder.status = "stopped";
+
+ }
+});
+
+
+var moveCharacter = function(characterPlaceholder){
+  characterPlaceholder.status = "moving";
+  var placeholderSelector = $("#" + characterPlaceholder.name);
+  var currentTop = placeholderSelector.css("top").replace("%","").replace("px", "");
+  if(currentTop == characterPlaceholder.startY){
+    //so move up
+    placeholderSelector.css("top", characterPlaceholder.maximumY + "px");
+    placeholderSelector.addClass("take-action");
+    characterPlaceholder.status = "moving";
+  }else{
+    //move down
+    placeholderSelector.css("top", characterPlaceholder.startY + "px");
+    placeholderSelector.addClass("hide");
+  }
 
 
 
-var moveCharacter = function(characterPlaceholder, moveY, isToMoveDown){
+  
+  /*
   characterPlaceholder.status = "moving";
   if(moveY == undefined && isToMoveDown == undefined) {
     var currentTop  = $("#" + characterPlaceholder.name).css("top").replace("px","");
@@ -117,22 +153,20 @@ var moveCharacter = function(characterPlaceholder, moveY, isToMoveDown){
       characterPlaceholder.status = "stopped";
       
       
-      /*
-      characterPlaceholder.currentTimeout =  setTimeout(function(){
-       // moveCharacter(characterPlaceholder);
-      },500);*/
     }else{
       characterPlaceholder.status = "showing";
       actionCharacter(characterPlaceholder);
     }
   }
+  */
+
 };
 
 
 
 
 
-var actionCharacter = function(characterPlaceholder, callback){
+var actionCharacter = function(characterPlaceholder){
   characterPlaceholder.status = "prepare";
   $("#" + characterPlaceholder.name).css("background-position-x", characterPlaceholder.character.prepareX + "px");
 
@@ -187,7 +221,6 @@ var getRandomPlaceholderStopped = function(){
 };
 
 var renderPlaceholder = function(placeholder){
-  $("#" + placeholder.name).css("top", placeholder.startY + "px");
   $("#" + placeholder.name).css("background-position-x", placeholder.character.x + "px");
   $("#" + placeholder.name).css("background-position-y", placeholder.character.y + "px");
 };
@@ -217,21 +250,41 @@ var setCharacterToMove = function(maxCharactersAtSameTime){
 };
 
 
+$("#" + characterPlaceholder[0].name).css("top", characterPlaceholder[0].startY + "px");
+$("#" + characterPlaceholder[1].name).css("top", characterPlaceholder[1].startY + "px");
+$("#" + characterPlaceholder[2].name).css("top", characterPlaceholder[2].startY + "px");
+$("#" + characterPlaceholder[3].name).css("top", characterPlaceholder[3].startY + "px");
 
-setInterval(function(){
-  var characters = 0;
-  if(player.kills < 3){
-    characters = 1;
-  }else if(player.kills < 7){
-    characters = 2;
-  }else if(player.kills < 10){
-    characters = 3;
-  }else{
-    characters = 4;
-  }
 
-  setCharacterToMove(characters);
-}, 1000);
+setTimeout(function(){
+  $("#" + characterPlaceholder[0].name).addClass("character-transition");
+  $("#" + characterPlaceholder[1].name).addClass("character-transition");
+  $("#" + characterPlaceholder[2].name).addClass("character-transition");
+  $("#" + characterPlaceholder[3].name).addClass("character-transition");
+
+  setInterval(function(){
+    var characters = 0;
+    if(player.kills < 3){
+      characters = 1;
+    }else if(player.kills < 7){
+      characters = 2;
+    }else if(player.kills < 10){
+      characters = 3;
+    }else{
+      characters = 4;
+    }
+
+    setCharacterToMove(characters);
+  }, 1000);
+
+
+
+},1000);
+
+/*
+
+
+*/
 
 
 
