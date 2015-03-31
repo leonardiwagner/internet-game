@@ -37,25 +37,21 @@ var characterPlaceholder = [
   },
 ];
 
-
-
 var characters = [];
-
 var addCharacter = function(name, y, x, prepareX, hitX, shootX, prepareSounds, hitSounds){
 
   characters.push({
     "name": name,
     "y": y,
-    "x": x + 15,
-    "prepareX": prepareX + 15,
+    "x": x - 15,
+    "prepareX": prepareX + 25,
     "hitX": hitX,
-    "shootX": shootX + 10,
+    "shootX": shootX + 20,
     "prepareSounds": prepareSounds,
     "hitSounds": hitSounds
   });
 
 };
-
 
 addCharacter("paidefamilia", -1163, 80, -180, -390, -570,["paidefamilia-1.ogg"],["paidefamilia-hit-1.ogg","paidefamilia-hit-2.ogg", "paidefamilia-hit-3.ogg"]);
 addCharacter("bioca", -930, 80, -180, -390, -570, ["bioca-1.ogg","bioca-2.ogg","bioca-3.ogg", "bioca-4.ogg", "bioca-5.ogg"], ["bioca-hit-1.ogg", "bioca-hit-2.ogg"]);
@@ -64,18 +60,12 @@ addCharacter("cacet", -699, 80, -180, -390, -570, ["cacet-1.ogg","cacet-2.ogg","
 addCharacter("morredi", -460, 80, -180, -390, -570, ["morrediabo-1.ogg","morrediabo-2.ogg","morrediabo-3.ogg","morrediabo-4.ogg","morrediabo-5.ogg",], ["morrediabo-hit.ogg"]);
 addCharacter("ahh", 0, 80, -180, -390, -570,["negobam-1.ogg", "negobam-2.ogg"],["negobam-hit.ogg"]);
 
-
-
-
-
-
 //on character transition (such as move up/down)
 $(".character").on("transitionend webkitTransitionEnd oTransitionEnd", function(){
  var placeholder = characterPlaceholder[$(this).data("id")];
  if($(this).hasClass("take-action")){
-  placeholder.status = "moved";
   $(this).removeClass("take-action");
-
+  placeholder.status = "moved";
   
   //play pepare sound
   var soundI = random(0, placeholder.character.prepareSounds.length - 1);
@@ -85,7 +75,6 @@ $(".character").on("transitionend webkitTransitionEnd oTransitionEnd", function(
  }else if($(this).hasClass("hide")){
   $(this).removeClass("hide");
   placeholder.status = "stopped";
-
  }
 });
 
@@ -104,67 +93,7 @@ var moveCharacter = function(characterPlaceholder){
     placeholderSelector.css("top", characterPlaceholder.startY + "px");
     placeholderSelector.addClass("hide");
   }
-
-
-
-  
-  /*
-  characterPlaceholder.status = "moving";
-  if(moveY == undefined && isToMoveDown == undefined) {
-    var currentTop  = $("#" + characterPlaceholder.name).css("top").replace("px","");
-    if(currentTop == characterPlaceholder.startY){
-       //play pepare sound
-       var soundI = random(0, characterPlaceholder.character.prepareSounds.length - 1);
-       playSound(characterPlaceholder.character.prepareSounds[soundI], 0);
-
-      isToMoveDown = false;
-      moveY = characterPlaceholder.startY;
-
-      
-    }else{
-      isToMoveDown = true;
-      moveY = characterPlaceholder.maximumY;
-    }
-  }
-
-  var hasToMove = false;
-  if(isToMoveDown){
-    moveY += 10;
-    if(moveY < characterPlaceholder.startY){
-      hasToMove = true;
-    }
-  }else{
-
-    moveY -= 10;  
-    if(moveY > characterPlaceholder.maximumY){
-      hasToMove = true;
-    }
-    
-  }
-  
-  if(hasToMove){
-    characterPlaceholder.currentTimeout =  setTimeout(function(){
-      $("#" + characterPlaceholder.name).css("top", moveY + "px");
-      moveCharacter(characterPlaceholder, moveY, isToMoveDown);
-    }, 10);
-  }else{
-    if(isToMoveDown){
-      $("#" + characterPlaceholder.name).css("top", characterPlaceholder.startY + "px");
-      characterPlaceholder.status = "stopped";
-      
-      
-    }else{
-      characterPlaceholder.status = "showing";
-      actionCharacter(characterPlaceholder);
-    }
-  }
-  */
-
 };
-
-
-
-
 
 var actionCharacter = function(characterPlaceholder){
   characterPlaceholder.status = "prepare";
@@ -198,17 +127,11 @@ var actionCharacter = function(characterPlaceholder){
       moveCharacter(characterPlaceholder);
     }
   },actionTime);
-
 };
-
-
 
 var message = function(text){
   $("#message").html(text);
 };
-
-
-
 
 var getRandomCharacter = function(){
   var randomCharacterIndex = random(0, characters.length - 1);
@@ -236,14 +159,12 @@ var getCharactersMovingCount = function(){
   return count;
 };
 
-
 var setCharacterToMove = function(maxCharactersAtSameTime){
   if(getCharactersMovingCount() < maxCharactersAtSameTime){
     var placeholder = getRandomPlaceholderStopped();
     placeholder.character = getRandomCharacter();
     renderPlaceholder(placeholder);
      
-    
     moveCharacter(placeholder);
   }
 
@@ -280,48 +201,3 @@ setTimeout(function(){
 
 
 },1000);
-
-/*
-
-
-*/
-
-
-
-
-
-
-
-
-
-/*
-
-for(var i = 0; i < characters.length; i++){
-  moveCharacter(characters[i]); 
-}
-
-var moveCharacterToWindow = function(currentTop){
- 
-  
-};
-
-
-
-    
-    var takeDecision = function(character){
-      setTimeout(function(){
-        $(character).addClass("prepare");
-
-        takeAction(character);
-      }, 1000);
-    };
-
-    var takeAction = function(character){
-      setTimeout(function(){
-        $(character).removeClass("prepare");
-        $(character).addClass("hit");
-      }, 1000);
-    };
-
-    moveCharacterToWindow(250);
-    */

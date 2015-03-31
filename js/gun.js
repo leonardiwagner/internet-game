@@ -69,14 +69,13 @@ $("#reload-button").click(function(){
 
 //shoot
 $(".character").click(function(characterPlaceholderElement){
-  player.ammo -= 1;
   if(player.ammo < 0){
     $("#reload-button").click();
     return;
   }
 
   if(player.isReloading) return;
-
+  player.ammo -= 1;
   playSound("shoot-1.ogg", 4);
   shotAnimation();
 

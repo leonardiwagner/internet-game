@@ -12,6 +12,8 @@ body{
   
   z-index: 99;
   background-position-x: 50%;
+
+  pointer-events: none;
     
 
 }
