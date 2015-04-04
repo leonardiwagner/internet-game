@@ -5,18 +5,44 @@ body{
 
 
 #background{
-  width:100%;
-  height:100%;
+   position: absolute;
+  top: 46px;
+  z-index: 100;
+  background-position-x: 50%;
+  pointer-events: none;
+  width: 500px;
+  left: -98px;
+}
+
+#sky{
   position: absolute;
+  top: -273px;
+  left:0;
 
   
-  z-index: 99;
+  z-index: 90;
   background-position-x: 50%;
 
   pointer-events: none;
-    
 
+  -webkit-animation-name: skymoving;
+  -webkit-animation-duration:60s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-direction: alternate;
+  -webkit-animation-timing-function: linear;
 }
+
+
+@-webkit-keyframes skymoving {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: -1000;
+  }
+}
+
+
 
 .background{
   width:100%;
@@ -41,11 +67,11 @@ body{
 }
 
 #background-layer-1{
-  background-color: black;
+  background-color: rgb(50, 49, 55);
   
   top:200px;
 
-  z-index: 55;
+  z-index: 98;
 }
 
 #background-layer-2{
@@ -67,7 +93,6 @@ body{
   width: 200px;
   height: 200px;
 
-  background-color: green;
 
   top: 500px;
 
@@ -85,9 +110,22 @@ body{
 
 .character-transition{
   transition-property: top;
-  transition-duration: 3s;
+  transition-duration: 1s;
   transition-timing-function: linear;
 }
+
+.character-transition-fast{
+  transition-duration: 1s;
+}
+
+.character-transition-faster{
+  transition-duration: 0.5s;
+}
+
+.character-transition-fastest{
+  transition-duration: 0.1s;
+}
+
 
 /*
 @-moz-keyframes upCharacter {
@@ -99,30 +137,30 @@ body{
 
 #character-0{
   
-  left:20px;
+  left:-5px;
 
-  z-index: 51;
+    z-index: 95;
 }
 
 #character-1{
   
-  left:183px;
+  left:145px;
 
-  z-index: 51;
+  z-index: 95;
 }
 
 #character-2{
   
-  left:15px;
+  left:-25px;
 
-  z-index: 56;
+  z-index: 99;
 }
 
 #character-3{
   
-  left:173px;
+  left:145px;
 
-  z-index: 56;
+  z-index: 99;
 }
 
 
@@ -150,7 +188,40 @@ body{
   width: 100%;
   height: 20px;
   z-index:100;
+
+  overflow: hidden;
+
+  background-image:url('../img/health-bar.png');
+
+
 }
+
+
+
+#player-health-bar img{
+  width: 100%;
+  position:absolute;
+  bottom: 0px;
+  
+  -webkit-animation-name: bloodmoving;
+  -webkit-animation-duration:30s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-direction: alternate;
+  -webkit-animation-timing-function: linear;
+}
+
+@-webkit-keyframes bloodmoving {
+  0% {
+    bottom: 0px;
+  }
+  100% {
+    bottom: -100px;
+  }
+}
+
+/*
+
+
 #player-health-bar-fill{
    position: absolute;
   background-color: red;
@@ -160,7 +231,7 @@ body{
   width: 60%;
   height: 20px;
   z-index:101;
-}
+}*/
 
 .blood{
   position: absolute;
@@ -217,13 +288,32 @@ body{
    position: absolute;
   left: 8%;
   bottom: 20px;
-  background-image: url('../img/sprite-handgun.png');
   width: 170px;
   height: 142px;
   /* background-color: yellow; */
   z-index: 100;
-  background-size: 117%;
+  /*background-size: 117%;*/
+
+  -webkit-animation-name: gunmoving;
+  -webkit-animation-duration:5s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-direction: alternate;
+  -webkit-animation-timing-function: linear;
 }
+
+#gun{
+  
+}
+
+@-webkit-keyframes gunmoving {
+  0% {
+    bottom: 20px;
+  }
+  100% {
+    bottom: 19px;
+  }
+}
+
 
 #secondary-character{
   position: absolute;

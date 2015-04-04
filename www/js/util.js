@@ -31,14 +31,30 @@ var channel = [
 
 
 var playSound = function(soundName, channelIndex){
+
+  var isDevice = window.device != undefined;
+
   var audioObject = channel[channelIndex].audioObject;
   if(audioObject != null){
     audioObject.pause();
   }
 
-  channel[channelIndex].audioObject = new Audio("sound/" + soundName);
-  channel[channelIndex].audioObject.load();
-  channel[channelIndex].audioObject.play();
+  if(isDevice){
+    channel[channelIndex].audioObject = new Media("/android_asset/www/sound/" + soundName, function(){
+      channel[channelIndex].audioObject.release();
+      channel[channelIndex].audioObject = null;
+    }, function(){
+      channel[channelIndex].audioObject.release();
+      channel[channelIndex].audioObject = null;
+    });
+
+    channel[channelIndex].audioObject.play();
+  }else{
+    channel[channelIndex].audioObject = new Audio("sound/" + soundName);
+    channel[channelIndex].audioObject.load();
+    channel[channelIndex].audioObject.play();
+  }
+  
 };
 
 var random = function(min, max){

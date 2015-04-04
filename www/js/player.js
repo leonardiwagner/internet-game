@@ -7,6 +7,8 @@ var player = {
 
 var sumLife = function(sum){
   player.life += sum;
-  $("#player-life").html(player.life);
-  $("#player-health-bar-fill").css("width", player.life + "%")
+  $("#player-health-info").html(player.life);
+  $("#player-health-bar img").css("width", player.life + "%")
+
+  
 };
